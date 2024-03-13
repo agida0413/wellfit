@@ -1,0 +1,10 @@
+/*
+Custom Css
+*/
+.text-overflow-ellipsis3 {
+    width: 100px; /* 텍스트 컨테이너의 너비를 지정합니다. 원하는 너비로 변경하세요. */
+    white-space: nowrap;
+    overflow: hidden;
+
+
+}
