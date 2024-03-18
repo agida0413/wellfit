@@ -111,17 +111,17 @@ function Header() {
                                 <a className="nav-link" href="/">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/brand/list">Brand</a>
+                                <a className="nav-link" href="/brand/list">브랜드</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/cloth/list">Shop</a>
+                                <a className="nav-link" href="/cloth/list">상품</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/board/list">Community</a>
+                                <a className="nav-link" href="/board/list">커뮤니티</a>
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link" href="/other/shopping">OtherShopping</a>
+                                <a className="nav-link" href="/other/shopping">사이트 외 쇼핑</a>
                             </li>
                         </ul>
                     </div>

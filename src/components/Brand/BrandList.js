@@ -1,49 +1,47 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import Pagination from "../common/Pagination";
 import axios from "axios";
-
+import {AllGetData} from "../actions/AllGetData";
+import { useQuery } from "react-query";
+import apiClient from '../../http-commons'
 function BrandList(){
-    const [list,setList]=useState([])
+
     const [curpage, setCurpage] = useState(1);
-    const [totalpage, setTotalapge] = useState(0);
-    const [endpage, setEndpage] = useState(0);
-    const [startpage, setStartpage] = useState(0);
     const [ss,setSs]=useState('')
+    const ssRef=useRef(null)
 
-    useEffect(() => {
-        axios.get('http://localhost/brand/list',{
+    const {isLoading,isError,error,data,refetch}=useQuery(['brand-list',curpage,ss],
+    async ()=>{
+        return await apiClient.get(`/brand/list/${curpage}`,{
             params:{
-                ss:ss,
-                page:curpage
+                ss:ss
             }
-        }).then(response => {
-            setTotalapge(response.data.totalpage);
-            setCurpage(response.data.curpage);
-            setStartpage(response.data.startpage)
-            setEndpage(response.data.endpage)
-            setList(response.data.list)
+        })
+    }
+    
+    )
+    // const {isLoading,isError,error,data}
+    //     =AllGetData('http://localhost/brand/list',
+    //     {page:curpage,ss:ss},'brandList-'+ss,curpage)
+    if(isLoading) return <h3 className={"text-center"}>Loading</h3>
+    if(isError) return <h3 className={"text-center"}>{error.message}</h3>
 
-
-        });
-    }, [curpage, startpage, endpage, ss]);
     const onPageChange = (page) => {
         setCurpage(page);
     };
+
+    let temp=''
     const changeSs=(event)=>{
-        setSs(event.target.value)
-        setCurpage('1')
+       temp=event.target.value
+      ssRef.current.value=temp
+    }
+    const find=()=>{
+        setSs(temp)
+        setCurpage(1)
     }
 
-    let html=list.map((vo) =>
-        <div className="col-12 col-md-4 p-5 mt-3" style={{"borderTop":"1px gray solid"}}>
-            <img src="../assets/img/BrandImg.png" alt="" style={{"width": "100%", "height": "70%"} }
-                 className="rounded-circle img-fluid border"/>
-            <h2 className="text-center mt-3 mb-3" style={{"fontWeight":"bold","color":"purple"}}>{vo.name}</h2>
-            <p className="text-center"><Link to={'/brand/detail/'+vo.bno} className="btn btn-success">Go Shop</Link>
-            </p>
-        </div>
-    )
+
     return (
         <div className={"container py-5"} >
             <div className={"row"} >
@@ -54,12 +52,12 @@ function BrandList(){
                             <div className="input-group mb-2">
                                 <input type="text" className="form-control" id="inputModalSearch" name="q"
                                        placeholder="Search ..."
-                                       placeholder="Search ..."
-                                       value={ss}
-                                       onChange={changeSs}
+
+                                        onChange={changeSs}
+                                       ref={ssRef}
 
                                 />
-                                <button type="submit" className="input-group-text bg-success text-light">
+                                <button type="submit" className="input-group-text bg-success text-light" onClick={find}>
                                     <i className="fa fa-fw fa-search text-white"></i>
                                 </button>
                             </div>
@@ -70,11 +68,21 @@ function BrandList(){
             </div>
 
             <div className={"row"}>
-                {html}
+                {
+                    data.data.list.map((vo) =>
+                        <div className="col-12 col-md-4 p-5 mt-3" style={{"borderTop":"1px gray solid"}}>
+                            <img src="../assets/img/BrandImg.png" alt="" style={{"width": "100%", "height": "70%"} }
+                                 className="rounded-circle img-fluid border"/>
+                            <h2 className="text-center mt-3 mb-3" style={{"fontWeight":"bold","color":"purple"}}>{vo.name}</h2>
+                            <p className="text-center"><Link to={'/brand/detail/'+vo.bno} className="btn btn-success">Go Shop</Link>
+                            </p>
+                        </div>
+                    )
+                }
             </div>
             <div className="row">
-                <Pagination curPage={curpage} totalPage={totalpage} startPage={startpage}
-                            endPage={endpage} onPageChange={onPageChange}/>
+                <Pagination curPage={curpage} totalPage={data.data.totalpage} startPage={data.data.startpage}
+                            endPage={data.data.endpage} onPageChange={onPageChange}/>
             </div>
 
         </div>

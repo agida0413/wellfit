@@ -17,8 +17,22 @@ import ClothDetail from "./components/cloth/ClothDetail";
 import BrandList from "./components/Brand/BrandList";
 import BrandDetail from "./components/Brand/BrandDetail";
 import OtherShopping from "./components/Other/OtherShopping";
+import {QueryClientProvider,QueryClient} from "react-query";
+const queryClient=new QueryClient({
+    defaultOptions:{
+        queries:{
+            refetchOnWindowFocus:false,
+            refetchOnMount:false,
+            refetchOnReconnect:false,
+            retry:false,
+            staleTime:5*60*1000
+        }
+    }
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <QueryClientProvider client={queryClient}>
 <Router>
 
         <Header/>
@@ -27,11 +41,11 @@ root.render(
     <div className={"container"}>
         <Routes>
     <Route exact path={"/"} element={<Home/>}/>
-            <Route path={"/board/list"} element={<BoardList/>}/>
-            <Route path={"/board/insert"} element={<BoardInsert/>}/>
-            <Route path={"/board/detail/:no"} element={<BoardDetail/>}/>
-            <Route path={"/board/update/:no"} element={<BoardUpdate/>}/>
-            <Route path={"/board/delete/:no"} element={<BoardDelete/>}/>
+    <Route path="/board/list" element={<BoardList/>}/>
+          <Route path="/board/insert" element={<BoardInsert/>}/>
+          <Route path="/board/detail/:no" element={<BoardDetail/>}/>
+          <Route path="/board/update/:no" element={<BoardUpdate/>}/>
+          <Route path="/board/delete/:no" element={<BoardDelete/>}/>
             <Route path={"/cloth/list"} element={<ClothList/>}/>
             <Route path={"/cloth/detail/:pno"} element={<ClothDetail/>}/>
             <Route path={"/brand/list"} element={<BrandList/>}/>
@@ -44,6 +58,7 @@ root.render(
 
 
 </Router>
+    </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
