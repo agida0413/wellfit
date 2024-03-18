@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
+import {AllGetData} from "../actions/AllGetData";
 
 
 
@@ -8,6 +9,11 @@ function ClothDetail(){
     const { pno } = useParams(); // 초기 pno 값을 받아옴
     const [vo,setVo]=useState({})
     const [cList,setCList]=useState([])
+    const [curpage,setCurpage]=useState(1)
+
+
+
+
 
 
     useEffect(() => {
@@ -20,11 +26,12 @@ function ClothDetail(){
             .then(response => {
                 setVo(response.data.vo);
                 setCList(response.data.cList)
+
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [pno]);
+    }, [pno,curpage]);
 
     let cookieHtml=cList.map((cvo) =>
         <div className="col-3">
@@ -211,6 +218,9 @@ function ClothDetail(){
                     </div>
                 </div>
             </section>
+            <div className={"row"}>
+
+            </div>
         </Fragment>
 
     )

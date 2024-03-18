@@ -17,8 +17,20 @@ import ClothDetail from "./components/cloth/ClothDetail";
 import BrandList from "./components/Brand/BrandList";
 import BrandDetail from "./components/Brand/BrandDetail";
 import OtherShopping from "./components/Other/OtherShopping";
+import {QueryClientProvider,QueryClient} from "react-query";
+const queryClient=new QueryClient({
+    defaultOptions:{
+        queries:{
+            refetchOnWindowFocus:false,
+            staleTime:5*30*600,
+            retry:0
+        }
+    }
+})
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+    <QueryClientProvider client={queryClient}>
 <Router>
 
         <Header/>
@@ -44,6 +56,7 @@ root.render(
 
 
 </Router>
+    </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
