@@ -1,10 +1,6 @@
 import { useState,useRef } from "react";
 import { useMutation } from "react-query";
-/*
-    useQuery : 단일 URL연결후 = 데이터 읽기
-    useQueries : 다중 URL 연결 = 데이터 읽기
-    useMutation : 특정 데이터 처리 => 쓰기 => insert,update,delete
-*/
+
 import apiClient from '../../http-commons'
 import { useNavigate } from "react-router-dom";
 

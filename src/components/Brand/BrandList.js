@@ -3,13 +3,18 @@ import {Link} from "react-router-dom";
 import Pagination from "../common/Pagination";
 import axios from "axios";
 import {AllGetData} from "../actions/AllGetData";
+<<<<<<< HEAD
 import { useQuery } from "react-query";
 import apiClient from '../../http-commons'
+=======
+
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
 function BrandList(){
 
     const [curpage, setCurpage] = useState(1);
     const [ss,setSs]=useState('')
     const ssRef=useRef(null)
+<<<<<<< HEAD
 
     const {isLoading,isError,error,data,refetch}=useQuery(['brand-list',curpage,ss],
     async ()=>{
@@ -27,6 +32,14 @@ function BrandList(){
     if(isLoading) return <h3 className={"text-center"}>Loading</h3>
     if(isError) return <h3 className={"text-center"}>{error.message}</h3>
 
+=======
+    const {isLoading,isError,error,data}
+        =AllGetData('http://localhost/brand/list',
+        {page:curpage,ss:ss},'brandList-'+ss,curpage)
+    if(isLoading) return <h3 className={"text-center"}>Loading</h3>
+    if(isError) return <h3 className={"text-center"}>{error.message}</h3>
+
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
     const onPageChange = (page) => {
         setCurpage(page);
     };

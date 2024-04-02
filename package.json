@@ -18,8 +18,12 @@
     "request": "^2.88.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
+<<<<<<< HEAD
     "web-vitals": "^2.1.4",
     "bootstrap": "5.3.3"
+=======
+    "web-vitals": "^2.1.4"
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
   },
   "scripts": {
     "start": "react-scripts start",

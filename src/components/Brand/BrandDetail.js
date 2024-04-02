@@ -4,8 +4,12 @@ import axios from "axios";
 import Pagination from "../common/Pagination";
 import Pagination1 from "react-js-pagination"
 import {AllGetData} from "../actions/AllGetData";
+<<<<<<< HEAD
 import { useQuery } from "react-query";
 import apiClient from '../../http-commons'
+=======
+
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
 
 
 
@@ -15,6 +19,7 @@ function BrandDetail(){
     const [curpage, setCurpage] = useState(1);
 
 
+<<<<<<< HEAD
     const  {isLoading,isError,error,data,refetch}=useQuery(['brand-detail',curpage],
     async () =>{
         return await apiClient.get(`/brand/detail/${bno}/${curpage}`)
@@ -24,6 +29,11 @@ function BrandDetail(){
     // const {isLoading,isError,error,data,ref}
     //     =AllGetData('http://localhost/brand/detail',
     //     {page:curpage,bno:bno},'brandDetail-'+bno,curpage)
+=======
+    const {isLoading,isError,error,data}
+        =AllGetData('http://localhost/brand/detail',
+        {page:curpage,bno:bno},'brandDetail-'+bno,curpage)
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
     if(isLoading) return <h3 className={"text-center"}>Loading</h3>
     if(isError) return <h3 className={"text-center"}>{error.message}</h3>
 

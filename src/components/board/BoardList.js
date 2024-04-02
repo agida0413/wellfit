@@ -2,19 +2,7 @@ import { Fragment,useEffect,useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import apiClient from '../../http-commons'
-/*
-    이력서 
-    => 이력서 
-    => 교육내역서 
-    => 포트폴리어 
-       = 2차 팀별 프로젝트 
-       = 1차 팀별 프로젝트 
-       = 개인 프로젝트 (유사) 
-    => 자소서 
-    ----------------------- 
-    실무 : ERP => 관리 (데이터베이스 : CRUD) 
-           팀별 / 개인 (인터뷰)
-*/
+
 function BoardList(){
    const [curpage,setCurpage]=useState(1)
    const {isLoading,isError,error,data,refetch:hitIncrement}=useQuery(['board-list',curpage],
