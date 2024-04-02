@@ -1,10 +1,27 @@
+<<<<<<< HEAD
 import { Link, useParams } from "react-router-dom";
 import { Fragment } from "react";
 import { useQuery } from "react-query";
 import apiClient from '../../http-commons';
+=======
+import {Link, useParams} from "react-router-dom";
+import {Fragment, useEffect, useState} from "react";
+import axios from "axios";
+import {AllGetData} from "../actions/AllGetData";
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
 
 function ClothDetail() {
     const { pno } = useParams(); // 초기 pno 값을 받아옴
+<<<<<<< HEAD
+=======
+    const [vo,setVo]=useState({})
+    const [cList,setCList]=useState([])
+    const [curpage,setCurpage]=useState(1)
+
+
+
+
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
 
     const { isLoading, isError, error, data, refetch } = useQuery(['cloth-detail', pno],
         async () => {
@@ -12,6 +29,93 @@ function ClothDetail() {
         }
     );
 
+<<<<<<< HEAD
+=======
+    useEffect(() => {
+        axios.get('http://localhost/cloth/detail', {
+            params: {
+                pno: pno
+            },
+            withCredentials: true
+        })
+            .then(response => {
+                setVo(response.data.vo);
+                setCList(response.data.cList)
+
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }, [pno,curpage]);
+
+    let cookieHtml=cList.map((cvo) =>
+        <div className="col-3">
+
+
+            <div className="p-2 pb-3">
+                <div className="product-wap card rounded-0">
+                    <div className="card rounded-0">
+                        <img className="card-img rounded-0 img-fluid" src={cvo.image} alt="Product"/>
+                        <div
+                            className="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                            <ul className="list-unstyled">
+                                <li><Link className="btn btn-success text-white"
+                                          to="/shop-single"><i className="far fa-heart"></i></Link>
+                                </li>
+                                <li><Link className="btn btn-success text-white mt-2"
+                                          to="/shop-single"><i className="far fa-eye"></i></Link>
+                                </li>
+                                <li><Link className="btn btn-success text-white mt-2"
+                                          to="/shop-single"><i
+                                    className="fas fa-cart-plus"></i></Link></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="card-body">
+                    <span className="h3 text-decoration-none text-ellipsis"> <Link to={"/cloth/detail/" + cvo.pno}
+                                                                                   style={{textDecoration: 'none'}}><span
+                    >{cvo.name}</span></Link></span>
+                        <ul className="w-100 list-unstyled d-flex justify-content-between mb-0">
+                            <li>M/L/X/XL</li>
+                            <li className="pt-2">
+                                                    <span
+                                                        className="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                <span
+                                    className="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                <span
+                                    className="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                <span
+                                    className="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                <span
+                                    className="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                            </li>
+                        </ul>
+                        <ul className="list-unstyled d-flex justify-content-center mb-1">
+                            <li>
+                                <i className="text-warning fa fa-star"></i>
+                                <i className="text-warning fa fa-star"></i>
+                                <i className="text-warning fa fa-star"></i>
+                                <i className="text-muted fa fa-star"></i>
+                                <i className="text-muted fa fa-star"></i>
+                            </li>
+                        </ul>
+
+                        <p className="text-center mb-0">
+                            <span style={{"textDecoration": "line-through", "color": "gray"}}>{cvo.originalprice}</span>
+                            <span style={{color: 'red', fontStyle: 'italic', marginLeft: '10px'}}>{cvo.hit} hit</span>
+                        </p>
+
+                        <p className="text-center mb-0 ">
+                            <span style={{"fontSize": "30px", "fontWeight": "bold"}}>  {cvo.nowprice}</span>
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
     return (
         <Fragment>
             {/* 로딩 중이면 로딩 메시지를 표시 */}
@@ -177,7 +281,14 @@ function ClothDetail() {
                         </div>
                     </section>
                 </div>
+<<<<<<< HEAD
             )}
+=======
+            </section>
+            <div className={"row"}>
+
+            </div>
+>>>>>>> 2f28e7f26f9ecf74d895bd1034a6f34b04b1064d
         </Fragment>
     )
 }
